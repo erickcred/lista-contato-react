@@ -1,17 +1,19 @@
 import React from 'react'
-import EstiloGlobal, { Container } from './styles'
-import ListaContato from './container/ListaContato'
-import BarraLateral from './container/BarraLateral'
+import { BrowserRouter } from 'react-router-dom'
+import { Container, EstiloGlobal } from './styles'
+import BarraLateral from './containers/BarraLateral'
+import Content from './containers/Content'
 
-function App() {
+const App = () => {
   return (
-    <>
+    <BrowserRouter>
       <EstiloGlobal />
+
       <Container>
         <BarraLateral />
-        <ListaContato />
+        <Content />
       </Container>
-    </>
+    </BrowserRouter>
   )
 }
 

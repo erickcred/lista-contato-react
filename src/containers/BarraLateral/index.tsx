@@ -1,10 +1,11 @@
+import Menu from '../../components/Menu'
 import { Aside } from './styles'
 
 const BarraLateral = () => {
   return (
-    <>
-      <Aside>Barra lateral</Aside>
-    </>
+    <Aside>
+      <Menu />
+    </Aside>
   )
 }
 
