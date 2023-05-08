@@ -1,34 +1,15 @@
+import { useSelector, useDispatch } from 'react-redux'
 import TituloPagina from '../../components/TituloPagina'
 import { Table, Button, ButtonExclir } from './styles'
-
-const contatos = [
-  {
-    id: 1,
-    nome: 'Fulano da Silva',
-    telefone: '41 999990000',
-    email: 'fulano@email.com'
-  },
-  {
-    id: 2,
-    nome: 'Siclno da Silva',
-    telefone: '41 999991111',
-    email: 'siclano@email.com'
-  },
-  {
-    id: 3,
-    nome: 'Astou da Silva',
-    telefone: '41 999992222',
-    email: 'astou@email.com'
-  },
-  {
-    id: 4,
-    nome: 'Ferdin da Silva',
-    telefone: '41 999993333',
-    email: 'ferdin@email.com'
-  }
-]
+import { RootReducer } from '../../store'
+import { useNavigate } from 'react-router-dom'
+import { remove } from '../../store/reducers/contato'
 
 const Contatos = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { contatos } = useSelector((state: RootReducer) => state)
+
   return (
     <>
       <TituloPagina>Lista de Contatos</TituloPagina>
@@ -43,15 +24,19 @@ const Contatos = () => {
           </tr>
         </thead>
         <tbody>
-          {contatos.map((contato) => (
+          {contatos.itens.map((contato) => (
             <tr key={contato.id}>
               <td>{contato.id}</td>
               <td>{contato.nome}</td>
               <td>{contato.telefone}</td>
               <td>{contato.email}</td>
               <td>
-                <Button>Editar</Button>
-                <ButtonExclir>Excluir</ButtonExclir>
+                <Button onClick={() => navigate(`/cadastro/${contato.id}`)}>
+                  Editar
+                </Button>
+                <ButtonExclir onClick={() => dispatch(remove(contato.id))}>
+                  Excluir
+                </ButtonExclir>
               </td>
             </tr>
           ))}
